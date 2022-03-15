@@ -3,7 +3,7 @@
 #include <string>
 
 VideoDecoder::VideoDecoder(AVCodecParameters* codec_parameters) {
-	avcodec_register_all();
+	//avcodec_register_all(); comment out for ffmpeg 4.0 or later, see: https://github.com/leandromoreira/ffmpeg-libav-tutorial/issues/29
 	const auto codec = avcodec_find_decoder(codec_parameters->codec_id);
 	if (!codec) {
 		throw ffmpeg::Error{"Unsupported video codec"};

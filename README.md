@@ -1,5 +1,17 @@
-video-compare
-=============
+# video-compare
+
+# 特别说明
+
+本代码经过修改，适用于在mac上编译，为适配目前最新的ffmpeg-devel而删除了少数过时代码。
+
+本代码使用pkg-config查找依赖。
+
+如果有错误出现，请：
+
+```
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+```
+
 
 Split screen video comparison tool written in C++14 using FFmpeg libraries and SDL2. 
 

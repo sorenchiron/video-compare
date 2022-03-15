@@ -3,7 +3,7 @@
 #include <iostream>
 
 Demuxer::Demuxer(const std::string &file_name) {
-	av_register_all();
+	//av_register_all(); comment out for ffmpeg 4.0 or later, see: https://github.com/leandromoreira/ffmpeg-libav-tutorial/issues/29
 	ffmpeg::check(avformat_open_input(
 		&format_context_, file_name.c_str(), nullptr, nullptr));
 

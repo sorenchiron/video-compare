@@ -9,7 +9,7 @@ ifeq ($(shell uname), CYGWIN_NT-10.0)
   LDLIBS = -Lffmpeg-4.4.1-full_build-shared/lib/ -lavformat -lavcodec -lavutil -lswresample -lswscale -lSDL2 -lSDL2_ttf
 else
   CXX = g++
-  LDLIBS = -lavformat -lavcodec -lavutil -lswscale -lSDL2 -lSDL2_ttf -pthread
+  LDLIBS = -lSDL2 -lSDL2_ttf -pthread
 endif
 
 ifneq "$(wildcard /opt/homebrew)" ""
@@ -18,10 +18,11 @@ ifneq "$(wildcard /opt/homebrew)" ""
 else ifneq "$(wildcard /opt/local)" ""
   CXXFLAGS += -I/opt/local/include/
   LDLIBS += -L/opt/local/lib/
-else
-  CXXFLAGS += -I/usr/local/include/
-  LDLIBS += -L/usr/local/lib/
 endif
+CXXFLAGS += -I/usr/local/include/
+LDLIBS += -Wl,-no_compact_unwind -L/usr/local/lib/
+
+LDLIBS += `pkg-config --libs libavcodec libavformat libavutil libswscale`
 
 src = $(wildcard *.cpp)
 obj = $(src:.cpp=.o)
